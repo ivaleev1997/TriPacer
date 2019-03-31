@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">TriPacer</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">TRI\nPACER</string>
+
+    <string name="unit">Units</string>
+    <string name="time">TIME</string>
+    <string name="pace">PACE</string>
+
+    <string name="zero_time">00:00:00</string>
+    <string name="zero_pace">00:00</string>
+
+    <string name="swim100">/100m</string>
+    <string name="kmh">kmh</string>
+    <string name="km">/km</string>
+
+    <string name="t1">T1</string>
+    <string name="t2">T2</string>
+
+    <string name="swim_sprint">750m</string>
+    <string name="swim_olympic">1500m</string>
+    <string name="swim_half">1900m</string>
+    <string name="swim_iron">3800m</string>
+
+    <string name="bicycle_sprint">20km</string>
+    <string name="bicycle_olympic">40km</string>
+    <string name="bicycle_half">90km</string>
+    <string name="bicycle_iron">180km</string>
+
+    <string name="run_sprint">5km</string>
+    <string name="run_olympic">10km</string>
+    <string name="run_half">21.1km</string>
+    <string name="run_iron">42.195km</string>
+
+    <string name="sprint">sprint</string>
+    <string name="olympic">olympic</string>
+    <string name="half">half</string>
+    <string name="iron">iron</string>
+
+</resources>
