@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -38,13 +39,16 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.distance_recycler, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        mContentAdapter = new ContentAdapter(recyclerView.getContext());
+        mContentAdapter = new ContentAdapter(recyclerView.getContext(), mIOnItemClickListener);
         recyclerView.setAdapter(mContentAdapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return view;
     }
+
+    IOnItemClickListener mIOnItemClickListener =
+            position -> Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImageView;
@@ -55,14 +59,20 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
             mImageView = itemView.findViewById(R.id.imageDistance);
             mTextView = itemView.findViewById(R.id.nameDistance);
         }
+
+        public void bindListener(int position, final IOnItemClickListener listener) {
+            itemView.setOnClickListener((view) -> listener.onItemClick(position));
+        }
     }
 
     public class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         ArrayList<String> namesDistanceArrayList;
         private final Drawable[] avatarsDrawable;
+        private final IOnItemClickListener mListener;
 
-        public ContentAdapter(Context context) {
+        public ContentAdapter(Context context, IOnItemClickListener listener) {
+            mListener = listener;
             Resources resources = context.getResources();
             TypedArray distanceAvatarArray = resources.obtainTypedArray(R.array.distance_avatars);
             TypedArray namesArray = resources.obtainTypedArray(R.array.distance_names);
@@ -86,6 +96,7 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.mTextView.setText(namesDistanceArrayList.get(position));
             holder.mImageView.setImageDrawable(avatarsDrawable[position]);
+            holder.bindListener(position, mListener);
         }
 
         @Override
@@ -94,5 +105,9 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
         }
     }
 
+
+    public interface IOnItemClickListener {
+        void onItemClick(int position);
+    }
 
 }
