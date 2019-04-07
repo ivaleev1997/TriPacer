@@ -12,31 +12,62 @@
     <string name="zero_time">00:00:00</string>
     <string name="zero_pace">00:00</string>
 
-    <string name="swim100">/100m</string>
-    <string name="kmh">kmh</string>
-    <string name="km">/km</string>
+    <string name="swim100_met">/100m</string>
+    <string name="kmh_met">kmh</string>
+    <string name="km_met">/km</string>
+
+    <string name="swim100_imp">/100yds</string>
+    <string name="kmh_imp">mph</string>
+    <string name="km_imp">/mi</string>
 
     <string name="t1">T1</string>
     <string name="t2">T2</string>
 
-    <string name="swim_sprint">750m</string>
-    <string name="swim_olympic">1500m</string>
-    <string name="swim_half">1900m</string>
-    <string name="swim_iron">3800m</string>
+    <string name="swim_sprint_met">750m</string>
+    <string name="swim_olympic_met">1500m</string>
+    <string name="swim_half_met">1900m</string>
+    <string name="swim_iron_met">3800m</string>
 
-    <string name="bicycle_sprint">20km</string>
-    <string name="bicycle_olympic">40km</string>
-    <string name="bicycle_half">90km</string>
-    <string name="bicycle_iron">180km</string>
+    <string name="bicycle_sprint_met">20km</string>
+    <string name="bicycle_olympic_met">40km</string>
+    <string name="bicycle_half_met">90km</string>
+    <string name="bicycle_iron_met">180km</string>
 
-    <string name="run_sprint">5km</string>
-    <string name="run_olympic">10km</string>
-    <string name="run_half">21.1km</string>
-    <string name="run_iron">42.195km</string>
+    <string name="run_sprint_met">5km</string>
+    <string name="run_olympic_met">10km</string>
+    <string name="run_half_met">21.1km</string>
+    <string name="run_iron_met">42.195km</string>
+
+    <string name="swim_sprint_imp">0.47mi</string>
+    <string name="swim_olympic_imp">0.9mi</string>
+    <string name="swim_half_imp">1.2mi</string>
+    <string name="swim_iron_imp">2.4mi</string>
+
+    <string name="bicycle_sprint_imp">12mi</string>
+    <string name="bicycle_olympic_imp">25mi</string>
+    <string name="bicycle_half_imp">56mi</string>
+    <string name="bicycle_iron_imp">112mi</string>
+
+    <string name="run_sprint_imp">3mi</string>
+    <string name="run_olympic_imp">6.2mi</string>
+    <string name="run_half_imp">13.1mi</string>
+    <string name="run_iron_imp">26.2mi</string>
 
     <string name="sprint">sprint</string>
     <string name="olympic">olympic</string>
     <string name="half">half</string>
     <string name="iron">iron</string>
+
+    <string name="met">Metric</string>
+    <string name="imp">Imperial</string>
+
+    <string name="swim_unit_met">/100m</string>
+    <string name="swim_unit_imp">/100yds</string>
+
+    <string name="bicycle_unit_met">kmh</string>
+    <string name="bicycle_unit_imp">mph</string>
+
+    <string name="run_unit_met">/km</string>
+    <string name="run_unit_imp">/mi</string>
 
 </resources>

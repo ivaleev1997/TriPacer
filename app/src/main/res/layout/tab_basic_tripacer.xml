@@ -61,7 +61,7 @@
         android:id="@+id/swim100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/swim100"
+        android:text="@string/swim100_imp"
         app:layout_constraintBaseline_toBaselineOf="@+id/paceSwim"
         app:layout_constraintEnd_toEndOf="@+id/paceText"
         app:layout_constraintHorizontal_bias="0.5"
@@ -159,16 +159,15 @@
         android:layout_marginStart="8dp"
         android:text="@string/zero_pace"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
-        app:layout_constraintEnd_toStartOf="@+id/textView12"
+        app:layout_constraintEnd_toStartOf="@+id/bicSpeed"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/paceText"/>
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/bicSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/kmh"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="@+id/paceText"
         app:layout_constraintHorizontal_bias="0.5"
@@ -200,41 +199,25 @@
         android:layout_marginStart="8dp"
         android:text="@string/zero_pace"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
-        app:layout_constraintEnd_toStartOf="@+id/textView16"
+        app:layout_constraintEnd_toStartOf="@+id/runSpeed"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/paceText"/>
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/runSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/km"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
         app:layout_constraintEnd_toEndOf="@+id/paceText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView15"/>
 
-    <Button
-        android:id="@+id/btnCalc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"/>
-
     <TextView
         android:id="@+id/txtSwim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
@@ -243,7 +226,6 @@
         android:id="@+id/txtBicycle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"/>
@@ -252,7 +234,6 @@
         android:id="@+id/txtRun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="@+id/imageView7"

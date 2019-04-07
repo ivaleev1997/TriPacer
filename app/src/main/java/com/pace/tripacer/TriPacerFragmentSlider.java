@@ -17,6 +17,7 @@ import static com.pace.tripacer.MainActivity.TRI_ID_KEY;
 public class TriPacerFragmentSlider extends Fragment {
 
     private ViewPager mViewPager;
+    private BasicTriPacerFragment mCurrentFragmentTab;
 
     @Nullable
     @Override
@@ -70,12 +71,13 @@ public class TriPacerFragmentSlider extends Fragment {
 
         private Fragment getTabInstance(int argument) {
 
-            BasicTriPacerFragmentTab fragmentTab = new BasicTriPacerFragmentTab();
+            mCurrentFragmentTab = new BasicTriPacerFragment();
+
             Bundle bundle = new Bundle();
             bundle.putInt(TRI_ID_KEY, argument);
-            fragmentTab.setArguments(bundle);
+            mCurrentFragmentTab.setArguments(bundle);
 
-            return fragmentTab;
+            return mCurrentFragmentTab;
         }
     }
 

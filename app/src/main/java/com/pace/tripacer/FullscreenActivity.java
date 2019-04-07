@@ -74,7 +74,7 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     };
     /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
+     * Touch listener to use for in-distance_recycler UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
      * while interacting with activity UI.
      */

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="distance_avatars">
+        <item>@drawable/ic_test</item>
+        <item>@drawable/ic_test</item>
+        <item>@drawable/ic_test</item>
+        <item>@drawable/ic_test</item>
+    </array>
+
+    <array name="distance_names">
+        <item>sprint</item>
+        <item>olympic</item>
+        <item>half ironman</item>
+        <item>ironman</item>
+    </array>
+</resources>
