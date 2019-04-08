@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +31,6 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
     }
 
     public BottomSheetDistance() {
-
     }
 
     @Nullable
@@ -47,8 +47,12 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
         return view;
     }
 
-    IOnItemClickListener mIOnItemClickListener =
-            position -> Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+    private IOnItemClickListener mIOnItemClickListener =
+            position ->
+            {
+                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                ((MainActivity) Objects.requireNonNull(getActivity())).changeDistanceByChoiceInBottomSheet(position);
+            };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImageView;
@@ -56,8 +60,10 @@ public class BottomSheetDistance extends BottomSheetDialogFragment {
 
         private ViewHolder(final LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_distance, parent, false));
+            //itemView.isClickable();
             mImageView = itemView.findViewById(R.id.imageDistance);
             mTextView = itemView.findViewById(R.id.nameDistance);
+
         }
 
         public void bindListener(int position, final IOnItemClickListener listener) {

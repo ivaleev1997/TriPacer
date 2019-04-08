@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp">
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageDistance"
@@ -19,7 +14,7 @@
             android:layout_height="24dp"
             android:layout_marginRight="32dp"
             android:src="@drawable/ic_test"
-            android:tint="#737373" />
+            android:tint="#737373"/>
 
         <TextView
             android:id="@+id/nameDistance"
@@ -28,6 +23,5 @@
             android:layout_gravity="center_vertical"
             android:text="Distance"
             android:textColor="#737373"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
     </LinearLayout>
-</LinearLayout>

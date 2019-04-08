@@ -146,15 +146,20 @@ public class BasicTriPacerFragment extends Fragment {
         }
     }
 
-    private void checkMeasermentAndSetTextView() {
+    void changeDistance(int distance) {
+        mDistanceId = distance;
 
+        setDistancesTextViews();
     }
 
-    public void changeMeasureSystem(int measurment) {
+    void changeMeasureSystem(int measurment) {
         mCurrentMeasurement = measurment;
+
+        setMeasureTextViews();
+        setDistancesTextViews();
     }
 
-    public int getCurrentDistanceId() {
+    int getCurrentDistanceId() {
         return mDistanceId;
     }
 

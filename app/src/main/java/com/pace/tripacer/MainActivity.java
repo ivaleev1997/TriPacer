@@ -76,12 +76,14 @@ public class MainActivity extends AppCompatActivity {
                         if (mBasicTriPacerFragment != null) mBasicTriPacerFragment.changeMeasureSystem(METRIC);
 
                         saveMeasureSystem(METRIC);
+
                         break;
                     case 1://Imperial position
                         //change state in current tab
                         if (mBasicTriPacerFragment != null) mBasicTriPacerFragment.changeMeasureSystem(IMPERIAL);
 
                         saveMeasureSystem(IMPERIAL);
+
                         break;
                 }
             }
@@ -89,14 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
         int state;
         Bundle bundle = new Bundle();
-        if ((state = getMeasureSystemState()) == -1) {
-            segmentedButtonGroup.setPosition(1, 0);
+        if ((state = getMeasureSystemState()) == -1 || state == R.string.met) {
+            segmentedButtonGroup.setPosition(0, 0);
 
             bundle.putInt(SAVED_DATA_KEY_MEASURE, METRIC);
-
         }
         else {
-            segmentedButtonGroup.setPosition(state, 0);
+            segmentedButtonGroup.setPosition(1, 0);
 
             bundle.putInt(SAVED_DATA_KEY_MEASURE, state);
         }
@@ -134,11 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getMeasureSystemState() {
-        int result = -1;
-
-        result = mSharedPreferences.getInt(SAVED_DATA_KEY_MEASURE, -1);
-
-        return result;
+        return mSharedPreferences.getInt(SAVED_DATA_KEY_MEASURE, -1);
     }
 
 
@@ -160,5 +157,33 @@ public class MainActivity extends AppCompatActivity {
         //View view = getLayoutInflater().inflate(R.layout.distance_recycler, null);
         mBottomSheetDistance = BottomSheetDistance.getInstance();
         mBottomSheetDistance.show(getSupportFragmentManager(), "checkDistance");
+    }
+
+    public void changeDistanceByChoiceInBottomSheet(int position){
+        if (mBasicTriPacerFragment != null) {
+            switch (position) {
+                case 0://sprint
+                    mBasicTriPacerFragment.changeDistance(R.string.sprint);
+                    break;
+                case 1:
+                    mBasicTriPacerFragment.changeDistance(R.string.olympic);
+                    break;
+                case 2:
+                    mBasicTriPacerFragment.changeDistance(R.string.half);
+                    break;
+                case 3:
+                    mBasicTriPacerFragment.changeDistance(R.string.iron);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (mBottomSheetDistance.isVisible()) mBottomSheetDistance.dismiss();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveCurrentDistance();
     }
 }
