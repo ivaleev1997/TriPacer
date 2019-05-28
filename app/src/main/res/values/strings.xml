@@ -11,6 +11,7 @@
 
     <string name="zero_time">00:00:00</string>
     <string name="zero_pace">00:00</string>
+    <string name="zero_speed">00.00</string>
 
     <string name="swim100_met">/100m</string>
     <string name="kmh_met">kmh</string>

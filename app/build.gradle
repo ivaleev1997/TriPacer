@@ -35,4 +35,8 @@ dependencies {
     //Segmented button
     implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    //timepicker
+   // implementation 'com.kovachcode:timePickerWithSeconds:1.0.1'
+    implementation project(path: ':customizedtimepicker')
 }

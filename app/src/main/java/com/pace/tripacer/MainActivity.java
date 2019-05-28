@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,16 +22,25 @@ public class MainActivity extends AppCompatActivity {
     public static final String APP_SHARED_PREFS = "com.pace.tripacer";
     public static final String SAVED_DATA_KEY_MEASURE = "measureSystem";
     public static final String SAVED_DATA_KEY_DISTANCE = "distance";
+    public static final String TOTAL_TIME = "total_time";
 
-    public static final int DEFAULT_DISTANCE = R.string.half;//half iron
+    public static final int SPRINT = R.string.sprint;
+    public static final int OLYMPIC = R.string.olympic;
+    public static final int HALF = R.string.half;
+    public static final int IRONMAN = R.string.iron;
+
+    public static final int DEFAULT_DISTANCE = HALF;//half iron
 
     public static final int METRIC = R.string.met;
     public static final int IMPERIAL = R.string.imp;
 
+
     private BasicTriPacerFragment mBasicTriPacerFragment;
     private SharedPreferences mSharedPreferences;
     private BottomSheetDistance mBottomSheetDistance;
+
     private Boolean isRestored = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         getSharedPreference(getApplicationContext());
 
         initView();
-
 
         if (savedInstanceState != null) {
             isRestored = true;
@@ -64,6 +74,29 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(bar);
         bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: calculation
+                //TODO: save to history
+                if (mBasicTriPacerFragment != null) {
+                    Calculation calculation = new Calculation(
+                            mBasicTriPacerFragment.getSwimDistanceTotalTime(),
+                            mBasicTriPacerFragment.getT1TotalTime(),
+                            mBasicTriPacerFragment.getBicycleDistanceTotalTime(),
+                            mBasicTriPacerFragment.getT2TotalTime(),
+                            mBasicTriPacerFragment.getRunDistancetotalTime());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(TOTAL_TIME, calculation.getTotalTime());
+
+                    BottomSheetResult bottomSheetResult = BottomSheetResult.getInstance();
+                    bottomSheetResult.setArguments(bundle);
+                    bottomSheetResult.show(getSupportFragmentManager(), "Result");
+                }
+            }
+        });
 
         SegmentedButtonGroup segmentedButtonGroup = (SegmentedButtonGroup) findViewById(R.id.segmentedButtonGroup);
         segmentedButtonGroup.setOnClickedButtonListener(new SegmentedButtonGroup.OnClickedButtonListener() {
@@ -150,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, String.valueOf(item.getItemId()), Toast.LENGTH_SHORT).show();
             showModalBottomSheet();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -186,4 +220,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         saveCurrentDistance();
     }
+
 }
