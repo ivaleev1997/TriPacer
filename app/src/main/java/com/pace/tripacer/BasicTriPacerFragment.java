@@ -12,6 +12,7 @@ import com.firebasetestapp.customizedtimepicker.TimePickerNoHour;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import static com.pace.tripacer.MainActivity.HALF;
 import static com.pace.tripacer.MainActivity.IMPERIAL;
@@ -46,10 +47,11 @@ public class BasicTriPacerFragment extends Fragment {
     private TextView mT2Time;
 
     private int mCurrentMeasurement;
-    private Calculation mCalculation;
+    private CalcUtil mCalcUtil;
+    private LiveData<Integer> mDistanceLiveData;
+    private LiveData<Integer> mMeasureLiveData;
 
     public BasicTriPacerFragment() {
-
     }
 
     @Nullable
@@ -57,7 +59,9 @@ public class BasicTriPacerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
 
-        mCalculation = new Calculation();
+        mCalcUtil = new CalcUtil();
+        mDistanceLiveData = ((MainActivity)getActivity()).getLiveDataCurrentDistance();
+        mMeasureLiveData = ((MainActivity)getActivity()).getLiveDataCurrentMeasure();
 
         getMeasureId();
         getDistanceId();
@@ -65,6 +69,7 @@ public class BasicTriPacerFragment extends Fragment {
 
         return view;
     }
+
 
     private void getDistanceId() {
         assert getArguments() != null;
@@ -91,9 +96,9 @@ public class BasicTriPacerFragment extends Fragment {
         mSwimTotalTime.setOnClickListener(view -> {
             TimeModel timeModel = new TimeModel(mSwimTotalTime.getText().toString());
             new CustomizedTimePickerDialog(getContext(), (view1, hourOfDay, minute, seconds) -> {
-                //Toast.makeText(getContext(), Calculation.format(hourOfDay) + ":" + Calculation.format(minute) + ":" + Calculation.format(seconds), Toast.LENGTH_SHORT).show();
-                mSwimTotalTime.setText(Calculation.format(hourOfDay) + ":" + Calculation.format(minute) + ":" + Calculation.format(seconds));
-                mSwimPace.setText(mCalculation.calculateSwimPace(mDistanceId, mCurrentMeasurement, mSwimTotalTime.getText().toString()));
+                //Toast.makeText(getContext(), CalcUtil.format(hourOfDay) + ":" + CalcUtil.format(minute) + ":" + CalcUtil.format(seconds), Toast.LENGTH_SHORT).show();
+                mSwimTotalTime.setText(CalcUtil.format(hourOfDay) + ":" + CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
+                mSwimPace.setText(mCalcUtil.calculateSwimPace(mDistanceId, mCurrentMeasurement, mSwimTotalTime.getText().toString()));
             }, timeModel.getHour(),timeModel.getMinute(),timeModel.getSeconds(),true).show();
         });
 
@@ -101,8 +106,8 @@ public class BasicTriPacerFragment extends Fragment {
         mSwimPace.setOnClickListener(view -> {
             TimeModel timeModel = new TimeModel(mSwimPace.getText().toString());
             new CustomizedTimePickerDialog(getContext(), (view12, minute, seconds) -> {
-                mSwimPace.setText(Calculation.format(minute) + ":" + Calculation.format(seconds));
-                mSwimTotalTime.setText(mCalculation.calculateSwimTotalTime(mDistanceId, mCurrentMeasurement,mSwimPace.getText().toString()));
+                mSwimPace.setText(CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
+                mSwimTotalTime.setText(mCalcUtil.calculateSwimTotalTime(mDistanceId, mCurrentMeasurement,mSwimPace.getText().toString()));
             }, timeModel.getMinute(),timeModel.getSeconds()).show();
         });
 
@@ -112,9 +117,9 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute, int seconds) {
-                    mBicycleTotalTime.setText(Calculation.format(hourOfDay) + ":" + Calculation.format(minute) + ":" +Calculation.format(seconds));
+                    mBicycleTotalTime.setText(CalcUtil.format(hourOfDay) + ":" + CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
                     //TODO: add calculation methods calculateBicyclePace..
-                    mBicycleSpeed.setText(mCalculation.calculateBicyclePace(mDistanceId, mCurrentMeasurement, mBicycleTotalTime.getText().toString()));
+                    mBicycleSpeed.setText(mCalcUtil.calculateBicyclePace(mDistanceId, mCurrentMeasurement, mBicycleTotalTime.getText().toString()));
                 }
             }, timeModel.getHour(),timeModel.getMinute(),timeModel.getSeconds(),true).show();
         });
@@ -125,8 +130,8 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListenerNohour() {
                 @Override
                 public void onTimeSet(TimePickerNoHour view, int minute, int seconds) {
-                    mBicycleSpeed.setText(Calculation.format(minute) + "." + Calculation.format(seconds));
-                    mBicycleTotalTime.setText(mCalculation.calculateBicycleTotalTime(mDistanceId, mCurrentMeasurement, mBicycleSpeed.getText().toString()));
+                    mBicycleSpeed.setText(CalcUtil.format(minute) + "." + CalcUtil.format(seconds));
+                    mBicycleTotalTime.setText(mCalcUtil.calculateBicycleTotalTime(mDistanceId, mCurrentMeasurement, mBicycleSpeed.getText().toString()));
                 }
             }, timeModel.getMinute(), timeModel.getSeconds()).show();
         });
@@ -137,8 +142,8 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute, int seconds) {
-                    mRunTotalTime.setText(Calculation.format(hourOfDay) + ":" + Calculation.format(minute) + ":" + Calculation.format(seconds));
-                    mRunPace.setText(mCalculation.calculateRunPace(mDistanceId, mCurrentMeasurement, mRunTotalTime.getText().toString()));
+                    mRunTotalTime.setText(CalcUtil.format(hourOfDay) + ":" + CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
+                    mRunPace.setText(mCalcUtil.calculateRunPace(mDistanceId, mCurrentMeasurement, mRunTotalTime.getText().toString()));
                 }
             }, timeModel.getHour(), timeModel.getMinute(), timeModel.getSeconds(),true).show();
         });
@@ -149,8 +154,8 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListenerNohour() {
                 @Override
                 public void onTimeSet(TimePickerNoHour view, int minute, int seconds) {
-                    mRunPace.setText(Calculation.format(minute) + ":" + Calculation.format(seconds));
-                    mRunTotalTime.setText(mCalculation.calculateRunTotalTime(mDistanceId, mCurrentMeasurement, mRunPace.getText().toString()));
+                    mRunPace.setText(CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
+                    mRunTotalTime.setText(mCalcUtil.calculateRunTotalTime(mDistanceId, mCurrentMeasurement, mRunPace.getText().toString()));
                 }
             }, timeModel.getMinute(),timeModel.getSeconds()).show();
         });
@@ -161,7 +166,7 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListenerNohour() {
                 @Override
                 public void onTimeSet(TimePickerNoHour view, int minute, int seconds) {
-                    mT1Time.setText(Calculation.format(minute) + ":" + Calculation.format(seconds));
+                    mT1Time.setText(CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
                 }
             }, timeModel.getMinute(), timeModel.getSeconds()).show();
         });
@@ -172,7 +177,7 @@ public class BasicTriPacerFragment extends Fragment {
             new CustomizedTimePickerDialog(getContext(), new CustomizedTimePickerDialog.OnTimeSetListenerNohour() {
                 @Override
                 public void onTimeSet(TimePickerNoHour view, int minute, int seconds) {
-                    mT2Time.setText(Calculation.format(minute) + ":" + Calculation.format(seconds));
+                    mT2Time.setText(CalcUtil.format(minute) + ":" + CalcUtil.format(seconds));
                 }
             }, timeModel.getMinute(), timeModel.getSeconds()).show();
         });

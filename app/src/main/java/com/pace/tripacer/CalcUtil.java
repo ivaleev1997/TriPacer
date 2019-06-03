@@ -9,7 +9,7 @@ import static com.pace.tripacer.MainActivity.METRIC;
 import static com.pace.tripacer.MainActivity.OLYMPIC;
 import static com.pace.tripacer.MainActivity.SPRINT;
 
-public class Calculation {
+public class CalcUtil {
 
     private static final String REGEX = ":";
     private static final int TIME_MOD = 60;
@@ -57,7 +57,7 @@ public class Calculation {
     private String mRunPace;
 
 
-    public Calculation(String swim, String t1, String bike, String t2, String run) {
+    public CalcUtil(String swim, String t1, String bike, String t2, String run) {
         mSwimTotalTime = swim;
         mT1Time = t1;
         mBicycleTotalTime = bike;
@@ -66,7 +66,7 @@ public class Calculation {
 
         calculate();
     }
-    public Calculation() {}
+    public CalcUtil() {}
 
     public String getTotalTime() {
         return mTotalTime;

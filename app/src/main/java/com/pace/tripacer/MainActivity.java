@@ -13,6 +13,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomSheetDistance mBottomSheetDistance;
 
     private Boolean isRestored = false;
+    private TriPacerViewModel mTriPacerViewModel;
 
 
     @Override
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSharedPreference(getApplicationContext());
+        mTriPacerViewModel = ViewModelProviders.of(this).get(TriPacerViewModel.class);
 
         initView();
 
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO: calculation
                 //TODO: save to history
                 if (mBasicTriPacerFragment != null) {
-                    Calculation calculation = new Calculation(
+                    CalcUtil calcUtil = new CalcUtil(
                             mBasicTriPacerFragment.getSwimDistanceTotalTime(),
                             mBasicTriPacerFragment.getT1TotalTime(),
                             mBasicTriPacerFragment.getBicycleDistanceTotalTime(),
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                             mBasicTriPacerFragment.getRunDistancetotalTime());
 
                     Bundle bundle = new Bundle();
-                    bundle.putString(TOTAL_TIME, calculation.getTotalTime());
+                    bundle.putString(TOTAL_TIME, calcUtil.getTotalTime());
 
                     BottomSheetResult bottomSheetResult = BottomSheetResult.getInstance();
                     bottomSheetResult.setArguments(bundle);
@@ -214,6 +218,20 @@ public class MainActivity extends AppCompatActivity {
         }
         if (mBottomSheetDistance.isVisible()) mBottomSheetDistance.dismiss();
     }
+
+    public LiveData<Integer> getLiveDataCurrentDistance() {
+        return mTriPacerViewModel.getDistanceData();
+    }
+
+    public LiveData<Integer> getLiveDataCurrentMeasure() {
+        return mTriPacerViewModel.getMeasureData();
+    }
+
+    public void setCurrentDistance(int distance) {
+        mTriPacerViewModel.setCurrentDistance(distance);
+    }
+
+
 
     @Override
     protected void onDestroy() {
